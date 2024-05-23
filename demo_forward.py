@@ -26,7 +26,6 @@ class MainApp(App):
     def compose(self) -> ComposeResult:
         yield self.forward_select
         yield Label()
-        self.set_interval(1, self.refresh_label)
 
     @on(Select.Changed)
     def refresh_label(self):
