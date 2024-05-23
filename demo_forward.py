@@ -31,7 +31,6 @@ class MainApp(App):
     def refresh_label(self):
         label = self.query_one(Label)
         label.update(f"Selected: {self.forward_select.item.my_field}")
-        label.refresh()
 
 
 if __name__ == "__main__":
