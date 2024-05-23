@@ -23,8 +23,9 @@ class ObjectTable[T](DataTable):
 
     def __init__(self, items: List[T],
                  fields: List[str] = None,
-                 row_key_function=lambda item: str(id(item))):
-        super().__init__()
+                 row_key_function=lambda item: str(id(item)),
+                 *args, **kwargs):
+        super().__init__(*args, **kwargs)
         if fields is None:
             if len(items) > 0:
                 fields = list(vars(items[0]).keys())
