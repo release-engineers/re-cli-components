@@ -15,23 +15,26 @@ class ItemFieldEnum(Enum):
 
 class Item:
     def __init__(self, my_field: ItemFieldEnum):
-        self.my_field = my_field
+        self.my_field_1 = my_field
+        self.my_field_2 = my_field
+        self.my_field_3 = my_field
 
 
 class MainApp(App):
     def __init__(self):
         super().__init__()
         self.item = Item(ItemFieldEnum.BOB)
-        self.forward_select = ForwardSelect(self.item, "my_field", ForwardSelect.enum_options(ItemFieldEnum))
 
     def compose(self) -> ComposeResult:
-        yield self.forward_select
+        yield ForwardSelect(self.item, "my_field_1", ForwardSelect.enum_options(ItemFieldEnum))
+        yield ForwardSelect(self.item, "my_field_2", ForwardSelect.enum_options(ItemFieldEnum))
+        yield ForwardSelect(self.item, "my_field_3", ForwardSelect.enum_options(ItemFieldEnum))
         yield Label()
 
     @on(Select.Changed)
     def refresh_label(self):
         label = self.query_one(Label)
-        label.update(f"Selected: {self.item.my_field}")
+        label.update(f"Selected: {self.item.my_field_1}, {self.item.my_field_2}, {self.item.my_field_3}")
 
 
 if __name__ == "__main__":
